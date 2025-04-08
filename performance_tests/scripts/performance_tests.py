@@ -30,11 +30,11 @@ def send_requests(operation, batch_size):
 
         try:
             if operation == "create":
-                response = requests.post(f"{BASE_URL}/todos", json=payload)
+                response = requests.post(f"{BASE_URL}/projects", json=payload)
             elif operation == "delete":
-                response = requests.delete(f"{BASE_URL}/todos/{random.randint(1, 1000)}")
+                response = requests.delete(f"{BASE_URL}/projects/{random.randint(1, 1000)}")
             elif operation == "update":
-                response = requests.post(f"{BASE_URL}/todos/{random.randint(1, 1000)}", json={"title": "Updated Title"})
+                response = requests.post(f"{BASE_URL}/projects/{random.randint(1, 1000)}", json={"title": "Updated Title"})
             else:
                 raise ValueError("Unknown operation")
 
@@ -113,7 +113,7 @@ def write_results(operation, times, statuses, cpu, memory, batch_size):
 
 
 def run(sequence = False):
-    batch_sizes = [15000, 20000, 50000]
+    batch_sizes = [1000, 5000, 10000, 15000, 20000, 50000]
     if not sequence:
         operations = ["create", "update", "delete"]
 
@@ -128,7 +128,7 @@ def run(sequence = False):
 
 
 def main():
-    sequence = False
+    sequence = True
     run(sequence)
 
 if __name__ == "__main__":
